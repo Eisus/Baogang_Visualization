@@ -1,0 +1,8 @@
+.container-box {
+  margin: 10px 20px;
+}
+.container-box .tab-content {
+  border-left: none;
+  border-right: none;
+  border-bottom: none;
+}
