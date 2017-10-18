@@ -1,3 +1,51 @@
+<meta charset="UTF-8">
 <div class="car-page">
-    <h1></h1>
+    <h3 class="page-title">汽车厂需求量预测（辆数）</h3>
+    <div class="company-nav">
+        <div class="form-group">
+            <div class="mt-radio-inline">
+                <label class="mt-radio" ng-repeat="company in companies track by $index">
+                    <input type="radio" name="carType" ng-value="$index"
+                           ng-checked="$index==0" ng-model="$parent.companySelect"
+                           ng-change="test()"> {{ company }}
+                    <span></span>
+                </label>
+                <!--<label class="mt-radio">-->
+                    <!--<input type="radio" name="optionsRadios" value="option2">Option2-->
+                    <!--<span></span>-->
+                <!--</label>-->
+                <!--<label class="mt-radio">-->
+                    <!--<input type="radio" name="optionsRadios" value="option3">Option3-->
+                    <!--<span></span>-->
+                <!--</label>-->
+            </div>
+        </div>
+    </div>
+    <div class="car-table">
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered table-hover table-condensed">
+                <thead>
+                <tr>
+                    <th rowspan="2">车型</th>
+                    <th rowspan="2">准确度</th>
+                    <th rowspan="1" colspan="2" ng-repeat="(date, value) in carData[0].data" ng-bind="date"></th>
+                </tr>
+                <tr>
+                    <th rowspan="1" colspan="1" ng-repeat-start="date in carData[0].data">实际需求量</th>
+                    <th rowspan="1" colspan="1" ng-repeat-end>预测需求量</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr ng-repeat="car in carData">
+                    <td ng-bind="car.name"></td>
+                    <td ng-bind="car.accuracy"></td>
+                    <td ng-repeat-start="value in car.data" ng-bind="value.real">
+                    <td ng-repeat-end ng-bind="value.predict">
+                </tr>
+
+
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>

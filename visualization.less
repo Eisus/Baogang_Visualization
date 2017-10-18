@@ -1,11 +1,49 @@
 body {
   background-color: rgb(238, 241, 245);
+  color: #333;
 }
 .container-box {
   margin: 10px 20px;
+  .nav-tabs {
+    li {
+      a {
+        padding: 5px 7.5px;
+      }
+    }
+  }
   .tab-content {
     border-left: none;
     border-right: none;
     border-bottom: none
   }
+}
+.car-page {
+  .page-title {
+    text-align: center;
+    font-weight: bold;
+    margin-top: 10px;
+  }
+  .company-nav {
+    .form-group {
+      margin-bottom: 0;
+      .mt-radio {
+        margin-bottom: 0;
+      }
+    }
+
+  }
+  .car-table {
+    .table-responsive {
+      max-height: 200px;
+      overflow: auto;
+    }
+    table {
+      td, th{
+        min-width: 80px;
+        text-align: center;
+        font-size: 12px !important;
+      }
+    }
+  }
+
 }

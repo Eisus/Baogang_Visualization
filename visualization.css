@@ -1,11 +1,36 @@
 body {
   background-color: #eef1f5;
+  color: #333;
 }
 .container-box {
   margin: 10px 20px;
+}
+.container-box .nav-tabs li a {
+  padding: 5px 7.5px;
 }
 .container-box .tab-content {
   border-left: none;
   border-right: none;
   border-bottom: none;
+}
+.car-page .page-title {
+  text-align: center;
+  font-weight: bold;
+  margin-top: 10px;
+}
+.car-page .company-nav .form-group {
+  margin-bottom: 0;
+}
+.car-page .company-nav .form-group .mt-radio {
+  margin-bottom: 0;
+}
+.car-page .car-table .table-responsive {
+  max-height: 200px;
+  overflow: auto;
+}
+.car-page .car-table table td,
+.car-page .car-table table th {
+  min-width: 80px;
+  text-align: center;
+  font-size: 12px !important;
 }
