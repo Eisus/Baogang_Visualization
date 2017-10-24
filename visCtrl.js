@@ -315,7 +315,7 @@ app.controller('visualCtrl',['$scope', '$http', function($scope, $http) {
 var drawRadar = function(data15, data16) {
     var radarChart = echarts.init(document.getElementById('company-radar'));
     var option = {
-        tooltip: {},
+        legend: ['2015', '2016'],
         radar: {
             name: {
                 textStyle: {
@@ -326,7 +326,7 @@ var drawRadar = function(data15, data16) {
                 }
             },
             indicator: [
-                { name: '价格）', max: 75},
+                { name: '价格', max: 75},
                 { name: '质量', max: 110},
                 { name: '品种', max: 105},
                 { name: '资金', max: 70},
@@ -387,21 +387,21 @@ customer.factory('customerRequest', function($http) {
 customer.controller('customerCtrl', ['$scope', '$http','customerRequest', function($scope, $http, customerRequest) {
     $scope.distSelect = 'all';
     $scope.yearSelect = '2015';
-    customerRequest.getDist($scope.distSelect).then(function(res) {
-        $scope.distInfo = res.data;
-    }, function(res) {
-        console.log(res);
-    });
-    customerRequest.getCompany('all','all','all').then(function(res) {
-        $scope.customerTable = res.data;
-    }, function(res) {
-        console.log(res);
-    });
+    //customerRequest.getDist($scope.distSelect).then(function(res) {
+    //    $scope.distInfo = res.data;
+    //}, function(res) {
+    //    console.log(res);
+    //});
+    //customerRequest.getCompany('all','all','all').then(function(res) {
+    //    $scope.customerTable = res.data;
+    //}, function(res) {
+    //    console.log(res);
+    //});
     $scope.selectDist = function(event) {
         $scope.distSelect = event.target.name;
         customerRequest.getDist($scope.distSelect).then(function(res) {
             $scope.distInfo = res.data;
-            drawDistScatter($scope.distInfo.pic);
+            drawRadar($scope.distInfo.hist['2015'], $scope.distInfo.hist['2016']);
         }, function(res) {
             console.log(res);
         });
