@@ -22,7 +22,7 @@
                 <li ng-class="{ active: distSelect === 'south'}"><a name="south">南方</a></li>
                 <li ng-class="{ active: distSelect === 'west'}"><a name="west">西部</a></li>
             </ul>
-            <select class="bs-select form-control" ng-model="yearSelect">
+            <select class="bs-select form-control" ng-model="yearSelect" ng-change="setYear()">
                 <option>2015</option>
                 <option>2016</option>
             </select>
@@ -34,7 +34,7 @@
     <div class="bottom">
         <div class="customer-table">
             <div class="tools">
-                <select class="bs-select form-control">
+                <select class="bs-select form-control" ng-model="s_dist">
                     <option value="all">全部</option>
                     <option value="north">北方</option>
                     <option value="northeast">东北</option>
@@ -43,8 +43,8 @@
                     <option value="south">南方</option>
                     <option value="west">西部</option>
                 </select>
-                <select class="bs-select form-control">
-                    <option value="ala">全部</option>
+                <select class="bs-select form-control" ng-model="s_style">
+                    <option value="all">全部</option>
                     <option value="1">宝钢国际内子公司</option>
                     <option value="2">代理商</option>
                     <option value="3">潜在战略用户</option>
@@ -52,13 +52,14 @@
                     <option value="5">战略用户</option>
                     <option value="6">直供用户</option>
                 </select>
-                <select class="bs-select form-control">
-                    <option>全部</option>
-                    <option>忠诚型</option>
-                    <option>人质型</option>
-                    <option>流失型</option>
-                    <option>图利型</option>
+                <select class="bs-select form-control" ng-model="s_type">
+                    <option value="all">全部</option>
+                    <option value="1">忠诚型</option>
+                    <option value="2">人质型</option>
+                    <option value="3">流失型</option>
+                    <option value="4">图利型</option>
                 </select>
+                <button class="btn btn-success" ng-click="searchCompany()">搜索</button>
             </div>
             <div class="table-responsive">
                 <table class="table table-striped table-bordered table-hover table-condensed">
@@ -73,8 +74,8 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr ng-repeat="item in customerTable track by $index">
-                        <td ng-bind="item.Customer_Name"></td>
+                    <tr ng-repeat="item in customerTable">
+                        <td ><a ng-click="setCompany($index)">{{ item.Customer_Name}}</a></td>
                         <td ng-bind="item.District"></td>
                         <td ng-bind="item.Customer_Style"></td>
                         <td ng-bind="item.Type"></td>

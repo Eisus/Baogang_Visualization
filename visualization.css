@@ -110,10 +110,13 @@ body {
   padding: 5px;
 }
 #customerVis .bottom .radar-container {
-  width: 300px !important;
-  height: 300px !important;
+  width: 350px !important;
+  height: 350px !important;
 }
 #customerVis .bottom .radar-container .radar-chart {
   width: 100% !important;
   height: 100% !important;
+}
+#customerVis .bottom .company-bg {
+  background: rgba(175, 191, 255, 0.5) !important;
 }
