@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Data visualization</title>
+    <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="node_modules/bootstrap-table/dist/bootstrap-table.min.css" rel="stylesheet">
+    <link href="node_modules/select2/dist/css/select2.min.css" rel="stylesheet">
+    <link href="components.min.css" rel="stylesheet">
+    <link href="visualization.css" rel="stylesheet">
+</head>
+<body ng-app='customerApp' ng-controller="customerCtrl">
+<div id="customerVis" class="out-container">
+    <div class="top">
+        <div class="tabbable-line dist-chart">
+            <ul class=" nav nav-tabs" ng-click="selectDist($event)">
+                <li ng-class="{ active: distSelect === 'all'}"><a name="all">全部</a></li>
+                <li ng-class="{ active: distSelect === 'north'}"><a name="north">北方</a></li>
+                <li ng-class="{ active: distSelect === 'northeast'}"><a name="northeast">东北</a></li>
+                <li ng-class="{ active: distSelect === 'east'}"><a name="east">华东</a></li>
+                <li ng-class="{ active: distSelect === 'center'}"><a name="center">华中</a></li>
+                <li ng-class="{ active: distSelect === 'south'}"><a name="south">南方</a></li>
+                <li ng-class="{ active: distSelect === 'west'}"><a name="west">西部</a></li>
+            </ul>
+            <select class="bs-select form-control" ng-model="yearSelect">
+                <option>2015</option>
+                <option>2016</option>
+            </select>
+            <div id="dist-scatter" class="chart"></div>
+        </div>
+        <div class="compare-chart"></div>
+    </div>
+
+    <div class="bottom">
+        <div class="customer-table">
+            <div class="tools">
+                <select class="bs-select form-control">
+                    <option value="all">全部</option>
+                    <option value="north">北方</option>
+                    <option value="northeast">东北</option>
+                    <option value="east">华东</option>
+                    <option value="center">华中</option>
+                    <option value="south">南方</option>
+                    <option value="west">西部</option>
+                </select>
+                <select class="bs-select form-control">
+                    <option value="ala">全部</option>
+                    <option value="1">宝钢国际内子公司</option>
+                    <option value="2">代理商</option>
+                    <option value="3">潜在战略用户</option>
+                    <option value="4">一般最终用户</option>
+                    <option value="5">战略用户</option>
+                    <option value="6">直供用户</option>
+                </select>
+                <select class="bs-select form-control">
+                    <option>全部</option>
+                    <option>忠诚型</option>
+                    <option>人质型</option>
+                    <option>流失型</option>
+                    <option>图利型</option>
+                </select>
+            </div>
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered table-hover table-condensed">
+                    <thead>
+                    <tr>
+                        <th class="col-mid-3">客户全称</th>
+                        <th class="col-mid-2">区域</th>
+                        <th class="col-mid-2">类型</th>
+                        <th class="col-mid-3">客户类型</th>
+                        <th class="col-mid-1">忠诚度</th>
+                        <th class="col-mid-1">满意度</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="item in customerTable track by $index">
+                        <td ng-bind="item.Customer_Name"></td>
+                        <td ng-bind="item.District"></td>
+                        <td ng-bind="item.Customer_Style"></td>
+                        <td ng-bind="item.Type"></td>
+                        <td ng-bind="item.Loyalty"></td>
+                        <td ng-bind="item.Satisfaction"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="radar-container">
+            <div id="company-radar" class="radar-chart"></div>
+        </div>
+    </div>
+</div>
+
+
+<script src="node_modules/angular/angular.min.js"></script>
+<script src="node_modules/jquery/dist/jquery.min.js"></script>
+<script src="node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+<script src="node_modules/bootstrap-table/dist/bootstrap-table.min.js"></script>
+<script src="node_modules/select2/dist/js/select2.full.min.js"></script>
+<script src="echarts.min.js"></script>
+<script src="app.min.js"></script>
+<script src="visCtrl.js"></script>
+</>
+</html>

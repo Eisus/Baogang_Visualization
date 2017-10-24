@@ -4,20 +4,12 @@
     <div class="company-nav">
         <div class="form-group">
             <div class="mt-radio-inline">
-                <label class="mt-radio" ng-repeat="company in companies track by $index">
+                <label class="mt-radio" ng-repeat="company in companies">
                     <input type="radio" name="carType" ng-value="$index"
-                           ng-checked="$index==0" ng-model="$parent.companySelect"
-                           ng-change="test()"> {{ company }}
+                           ng-model="model.companySelect"
+                           ng-change="selectCompany()"> {{ company }}
                     <span></span>
                 </label>
-                <!--<label class="mt-radio">-->
-                    <!--<input type="radio" name="optionsRadios" value="option2">Option2-->
-                    <!--<span></span>-->
-                <!--</label>-->
-                <!--<label class="mt-radio">-->
-                    <!--<input type="radio" name="optionsRadios" value="option3">Option3-->
-                    <!--<span></span>-->
-                <!--</label>-->
             </div>
         </div>
     </div>
@@ -42,10 +34,12 @@
                     <td ng-repeat-start="value in car.data" ng-bind="value.real">
                     <td ng-repeat-end ng-bind="value.predict">
                 </tr>
-
-
                 </tbody>
             </table>
         </div>
     </div>
+    <div id="car-chart" style="width: 800px; height: 200px">
+
+    </div>
+
 </div>
