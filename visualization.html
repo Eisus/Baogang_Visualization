@@ -39,7 +39,7 @@
                                 <!--</label>-->
                             <!--</div>-->
                         <!--</div>-->
-                        <select class="company-list" ng-model="companySelect" on-select="selectCompany()">
+                        <select class="company-list" ng-model="companySelect" data-placeholder="test" >
                             <option ng-repeat="company in companies" ng-value="$index" ng-bind="company"></option>
                         </select>
                     </div>
@@ -70,7 +70,7 @@
                             </table>
                         </div>
                     </div>
-                    <div id="car-chart" style="width: 800px; height: 200px"></div>
+                    <div id="car-chart"></div>
 
                 </div>
             </div>

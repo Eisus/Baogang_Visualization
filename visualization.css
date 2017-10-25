@@ -25,7 +25,7 @@ body {
   margin-bottom: 0;
 }
 .car-page .car-table .table-responsive {
-  max-height: 200px;
+  max-height: 350px;
   overflow: auto;
 }
 .car-page .car-table table td,
@@ -33,6 +33,11 @@ body {
   min-width: 80px;
   text-align: center;
   font-size: 12px !important;
+}
+.car-page #car-chart {
+  width: 96%;
+  height: 350px;
+  margin: 15px auto;
 }
 #customerVis .top {
   background-color: #fff;

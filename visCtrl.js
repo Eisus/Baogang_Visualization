@@ -28,124 +28,6 @@ app.factory('carRequest', function($http) {
    };
 });
 
-// var carItem = {
-//     name: '201MCE',
-//     accuracy: 82.32,
-//     data: {
-//         '15-10': {
-//             real: 2681,
-//             predict: 2207,
-//             sale: 2000
-//         },
-//         '15-11': {
-//             real: 3660,
-//             predict: 2681,
-//             sale: 2000
-//         },
-//         '16-01': {
-//             real: 4373,
-//             predict: 3508,
-//             sale: 2000
-//         },
-//         '16-02': {
-//             real: 4425,
-//             predict: 4053,
-//             sale: 2000
-//         },
-//         '16-03': {
-//             real: 2844,
-//             predict: 3387,
-//             sale: 2000
-//         },
-//         '16-04': {
-//             real: 3380,
-//             predict: 3581,
-//             sale: 2000
-//         },
-//         '16-05': {
-//             real: 2899,
-//             predict: 2552,
-//             sale: 2000
-//         },
-//         '16-06': {
-//             real: 3497,
-//             predict: 2771,
-//             sale: 2000
-//         },
-//         '16-07': {
-//             real: 3396,
-//             predict: 3379,
-//             sale: 2000
-//         },
-//         '16-08': {
-//             real: null,
-//             predict: 3363,
-//             sale: null
-//         },
-//         '16-09': {
-//             real: null,
-//             predict: 3363,
-//             sale: null
-//         },
-//         '16-10': {
-//             real: null,
-//             predict: 3363,
-//             sale: null
-//         },
-//         '16-11': {
-//             real: null,
-//             predict: 3363,
-//             sale: null
-//         },
-//         '16-12': {
-//             real: null,
-//             predict: 3363,
-//             sale: null
-//         },
-//         '17-01': {
-//             real: null,
-//             predict: 3363,
-//             sale: null
-//         },
-//         '17-02': {
-//             real: null,
-//             predict: 3363,
-//             sale: null
-//         },
-//         '17-03': {
-//             real: null,
-//             predict: 3363,
-//             sale: null
-//         },
-//         '17-04': {
-//             real: null,
-//             predict: 3363,
-//             sale: null
-//         },
-//         '17-05': {
-//             real: null,
-//             predict: 3363,
-//             sale: null
-//         },
-//         '17-06': {
-//             real: null,
-//             predict: 3363,
-//             sale: null
-//         },
-//         '17-07': {
-//             real: null,
-//             predict: 3363,
-//             sale: null
-//         }
-//     }
-// };
-// var carData =[];
-// for (var i= 0; i<15; i++) {
-//     var temp = $.extend(true, {}, carItem);
-//     carData.push(temp);
-// }
-// var companies = ['长安马自达', '东风日产', '海马', '上海通用', '郑州日产'];
-
 var drawCarChart = function(date, data) {
     var carChart = echarts.init(document.getElementById('car-chart'));
     var option = {
@@ -206,8 +88,8 @@ app.controller('visualCtrl',['$scope', '$http','carRequest', function($scope, $h
     }, function(err) {
         console.log(err);
     })
-    // $scope.model = {};
-    //
+    $scope.model = {};
+
     $scope.selectCompany = function() {
        // send request and then set $scope.carData as response.data
         console.log($scope.companySelect);
@@ -245,7 +127,7 @@ app.controller('visualCtrl',['$scope', '$http','carRequest', function($scope, $h
     };
     $scope.selectCar = function(index) {
         $scope.carSelect = index;
-        data = prepareChartData(index);
+        var data = prepareChartData(index);
         drawCarChart(data.x, data.data);
     };
 
