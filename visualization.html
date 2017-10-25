@@ -39,7 +39,7 @@
                                 <!--</label>-->
                             <!--</div>-->
                         <!--</div>-->
-                        <select class="company-list" ng-model="companySelect" ng-change="selectCompany()">
+                        <select class="company-list" ng-model="companySelect" on-select="selectCompany()">
                             <option ng-repeat="company in companies" ng-value="$index" ng-bind="company"></option>
                         </select>
                     </div>
@@ -50,19 +50,21 @@
                                 <tr>
                                     <th rowspan="2">车型</th>
                                     <th rowspan="2">准确度</th>
-                                    <th rowspan="1" colspan="2" ng-repeat="(date, value) in carData[0].data" ng-bind="date"></th>
+                                    <th rowspan="1" colspan="3" ng-repeat="item in date" ng-bind="item"></th>
                                 </tr>
                                 <tr>
-                                    <th rowspan="1" colspan="1" ng-repeat-start="date in carData[0].data">实际需求量</th>
-                                    <th rowspan="1" colspan="1" ng-repeat-end>预测需求量</th>
+                                    <th rowspan="1" colspan="1" ng-repeat-start="date in carData[companySelect].data">实际需求量</th>
+                                    <th rowspan="1" colspan="1">预测需求量</th>
+                                    <th rowspan="1" colspan="1" ng-repeat-end>销量</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 <tr ng-repeat="car in carData">
                                     <td><a href="#" ng-click="selectCar($index)" ng-bind="car.name"></a></td>
                                     <td ng-bind="car.accuracy"></td>
-                                    <td ng-repeat-start="value in car.data" ng-bind="value.real">
-                                    <td ng-repeat-end ng-bind="value.predict">
+                                    <td ng-repeat-start="x in date" ng-bind="car.data[x].ACTUAL"></td>
+                                    <td ng-bind="car.data[x].PREDICT"></td>
+                                    <td ng-repeat-end ng-bind="car.data[x].CAR_SALE"></td>
                                 </tr>
                                 </tbody>
                             </table>

@@ -14,7 +14,7 @@ app.factory('carRequest', function($http) {
    };
    var getCarData = function(index) {
        return $http({
-           url: '',
+           url: 'http://10.127.1.102:5000/car_visualization?company_index=' + index,
            method: 'GET'
        });
    };
@@ -22,8 +22,8 @@ app.factory('carRequest', function($http) {
        getCompanyList: function() {
            return getCompanyList();
        },
-       getCarData: function() {
-           return getCarData();
+       getCarData: function(index) {
+           return getCarData(index);
        }
    };
 });
@@ -185,23 +185,41 @@ var drawCarChart = function(date, data) {
 
 
 app.controller('visualCtrl',['$scope', '$http','carRequest', function($scope, $http, carRequest) {
-    $scope.carData = $.extend(true, [], carData); // all cars data for a single company
+    // $scope.carData = $.extend(true, [], carData); // all cars data for a single company
     $scope.companies =  [];
+    $scope.companySelect = 0;
+    $scope.carSelect = 0;
+    $scope.date = [];
     carRequest.getCompanyList().then(function(res){
         $scope.companies = res.data;
     }, function(err){
         console.log(err);
     });
-    //$scope.model = {};
-    $scope.companySelect = 0;
-    $scope.carSelect = 0;
+    carRequest.getCarData($scope.companySelect).then(function(res) {
+        $scope.carData = $.extend(true, [], res.data);
+        for (var key in $scope.carData[0].data) {
+            $scope.date.push(key);
+        }
+        $scope.date = $scope.date.sort();
+        var data = prepareChartData($scope.carSelect);
+        drawCarChart(data.x, data.data);
+    }, function(err) {
+        console.log(err);
+    })
+    // $scope.model = {};
+    //
     $scope.selectCompany = function() {
        // send request and then set $scope.carData as response.data
-       console.log($scope.companySelect);
+        console.log($scope.companySelect);
+        // carRequest.getCarData($scope.companySelect).then(function(res) {
+        //     $scope.carData = $.extend(true, [], res.data);
+        // }, function(err) {
+        //     console.log(err);
+        // })
     };
-    // $scope.$watch("companySelect",function(newValue){
-    //     console.log(newValue);
-    // });
+    $scope.$watch("companySelect",function(newValue){
+        console.log(newValue);
+    });
     var prepareChartData = function(index) {
         var x = [];
         var data = {
@@ -213,25 +231,24 @@ app.controller('visualCtrl',['$scope', '$http','carRequest', function($scope, $h
         for (var key in dataSeries) {
             x.push(key);
         }
-        x.sort();
+        x = x.sort();
         for (var item in x) {
             var temp = dataSeries[x[item]];
-            data.real.push(temp.real);
-            data.predict.push(temp.predict);
-            data.sale.push(temp.sale);
+            data.real.push(temp.ACTUAL);
+            data.predict.push(temp.PREDICT);
+            data.sale.push(temp.CAR_SALE);
         }
         return {
             x: x,
             data: data
         };
     };
-    var data = prepareChartData($scope.carSelect);
-    drawCarChart(data.x, data.data);
     $scope.selectCar = function(index) {
         $scope.carSelect = index;
         data = prepareChartData(index);
         drawCarChart(data.x, data.data);
     };
+
 }]);
 
 //////////////////////////////////////////////////////////////////////////////////////
@@ -239,13 +256,6 @@ app.controller('visualCtrl',['$scope', '$http','carRequest', function($scope, $h
 var drawDistScatter = function(data) {
    var distScatter = echarts.init(document.getElementById('dist-scatter'));
    var option = option = {
-       // backgroundColor: new echarts.graphic.RadialGradient(0.3, 0.3, 0.8, [{
-       //     offset: 0,
-       //     color: '#f7f8fa'
-       // }, {
-       //     offset: 1,
-       //     color: '#cdd0d5'
-       // }]),
        backgroundColor: '#fff',
        legend: {
            right: 10,
@@ -256,7 +266,8 @@ var drawDistScatter = function(data) {
                lineStyle: {
                    type: 'dashed'
                }
-           }
+           },
+           min: 40
        },
        yAxis: {
            splitLine: {
@@ -271,7 +282,7 @@ var drawDistScatter = function(data) {
            data: data[0],
            type: 'scatter',
            symbolSize: function (data) {
-               return Math.sqrt(data[2]);
+               return Math.sqrt(data[2])*2
            },
            label: {
                emphasis: {
@@ -287,14 +298,7 @@ var drawDistScatter = function(data) {
                    shadowBlur: 10,
                    shadowColor: 'rgba(120, 36, 50, 0.5)',
                    shadowOffsetY: 5,
-                   // color: new echarts.graphic.RadialGradient(0.4, 0.3, 1, [{
-                   //     offset: 0,
-                   //     color: 'rgb(251, 118, 123)'
-                   // }, {
-                   //     offset: 1,
-                   //     color: 'rgb(204, 46, 72)'
-                   // }])
-                   color: '#ffa726'
+                   color: '#003366'
                }
            }
        }, {
@@ -302,7 +306,7 @@ var drawDistScatter = function(data) {
            data: data[1],
            type: 'scatter',
            symbolSize: function (data) {
-               return Math.sqrt(data[2]) ;
+               return Math.sqrt(data[2])*2;
            },
            label: {
                emphasis: {
@@ -318,14 +322,7 @@ var drawDistScatter = function(data) {
                    shadowBlur: 10,
                    shadowColor: 'rgba(25, 100, 150, 0.5)',
                    shadowOffsetY: 5,
-                   // color: new echarts.graphic.RadialGradient(0.4, 0.3, 1, [{
-                   //     offset: 0,
-                   //     color: 'rgb(129, 227, 238)'
-                   // }, {
-                   //     offset: 1,
-                   //     color: 'rgb(25, 183, 207)'
-                   // }])
-                   color: '#e84e40'
+                   color: '#006699'
                }
            }
        }, {
@@ -333,7 +330,7 @@ var drawDistScatter = function(data) {
            data: data[2],
            type: 'scatter',
            symbolSize: function (data) {
-               return Math.sqrt(data[2]);
+               return Math.sqrt(data[2])*2;
            },
            label: {
                emphasis: {
@@ -349,14 +346,7 @@ var drawDistScatter = function(data) {
                    shadowBlur: 10,
                    shadowColor: 'rgba(120, 36, 50, 0.5)',
                    shadowOffsetY: 5,
-                   // color: new echarts.graphic.RadialGradient(0.4, 0.3, 1, [{
-                   //     offset: 0,
-                   //     color: 'rgb(251, 118, 123)'
-                   // }, {
-                   //     offset: 1,
-                   //     color: 'rgb(204, 46, 72)'
-                   // }])
-                   color: '#ab47bc'
+                   color: '#4cabce'
                }
            }
        }, {
@@ -364,7 +354,7 @@ var drawDistScatter = function(data) {
            data: data[3],
            type: 'scatter',
            symbolSize: function (data) {
-               return Math.sqrt(data[2]);
+               return Math.sqrt(data[2])*2;
            },
            label: {
                emphasis: {
@@ -380,14 +370,7 @@ var drawDistScatter = function(data) {
                    shadowBlur: 10,
                    shadowColor: 'rgba(120, 36, 50, 0.5)',
                    shadowOffsetY: 5,
-                   // color: new echarts.graphic.RadialGradient(0.4, 0.3, 1, [{
-                   //     offset: 0,
-                   //     color: 'rgb(251, 118, 123)'
-                   // }, {
-                   //     offset: 1,
-                   //     color: 'rgb(204, 46, 72)'
-                   // }])
-                   color: '#5c6bc0'
+                   color: '#e5323e'
                }
            }
        }]
@@ -399,7 +382,8 @@ var drawRadar = function(data15, data16) {
     var radarChart = echarts.init(document.getElementById('company-radar'));
     var option = {
         legend: {
-            data: ['2015', '2016']
+            data: ['2015', '2016'],
+            right: 0
         },
         radar: {
             name: {
@@ -458,9 +442,9 @@ var prepareScaData = function(data) {
         temp.push(data[item].Type);
        if (data[item].Type === '忠诚型') {
            zc.push(temp);
-       } else if (data[item] === '人质型') {
+       } else if (data[item].Type === '人质型') {
            rz.push(temp);
-       } else if (data[item] === '流失型') {
+       } else if (data[item].Type === '流失型') {
            ls.push(temp);
        } else {
            tl.push(temp);
@@ -472,6 +456,71 @@ var prepareScaData = function(data) {
     result.push(ls);
     result.push(tl);
     return result;
+}
+var drawBar = function(data) {
+    var compareChart = echarts.init(document.getElementById('compare-bar'));
+     var option = {
+        color: ['#003366', '#006699', '#4cabce', '#e5323e'],
+        tooltip: {
+            trigger: 'axis',
+            axisPointer: {
+                type: 'shadow'
+            }
+        },
+        legend: {
+            data: ['忠诚','人质','流失','图利']
+        },
+        calculable: true,
+        xAxis: [
+            {
+                type: 'category',
+                axisTick: {show: false},
+                data: ['2015', '2016']
+            }
+        ],
+        yAxis: [
+            {
+                type: 'value'
+            }
+        ],
+        series: [
+            {
+                name: '忠诚',
+                type: 'bar',
+                barGap: 0,
+                data: data[0]
+            },
+            {
+                name: '人质',
+                type: 'bar',
+                data: data[1]
+            },
+            {
+                name: '流失',
+                type: 'bar',
+                data: data[2]
+            },
+            {
+                name: '图利',
+                type: 'bar',
+                data: data[3]
+            }
+        ]
+    };
+     compareChart.setOption(option);
+}
+var prepareBarData = function(data) {
+    var zc = [];
+    var rz = [];
+    var ls = [];
+    var tl = [];
+    for(var item in data) {
+        zc.push(data[item]['1']);
+        rz.push(data[item]['2']);
+        ls.push(data[item]['3']);
+        tl.push(data[item]['4']);
+    }
+    return [zc, rz, ls, tl];
 }
 
 var customer = angular.module('customerApp',[]);
@@ -507,9 +556,10 @@ customer.controller('customerCtrl', ['$scope', '$http','customerRequest', functi
 
     customerRequest.getDist($scope.distSelect).then(function(res) {
        $scope.distInfo = res.data;
-       console.log($scope.distInfo);
        var scaData = prepareScaData($scope.distInfo.pic);
        drawDistScatter(scaData);
+       var barData = prepareBarData($scope.distInfo.hist);
+       drawBar(barData);
     }, function(res) {
        console.log(res);
     });
@@ -533,21 +583,19 @@ customer.controller('customerCtrl', ['$scope', '$http','customerRequest', functi
     }, function(res) {
        console.log(res);
     });
+
     $scope.selectDist = function(event) {
         $scope.distSelect = event.target.name;
         customerRequest.getDist($scope.distSelect).then(function(res) {
             $scope.distInfo = res.data;
             var scaData = prepareScaData($scope.distInfo.pic);
             drawDistScatter(scaData);
+            var barData = prepareBarData($scope.distInfo.hist);
+            drawBar(barData);
         }, function(res) {
             console.log(res);
         });
     };
-    $scope.setYear = function() {
-
-    };
-
-
     $scope.searchCompany = function() {
         customerRequest.getCompany($scope.s_dist,$scope.s_style,$scope.s_type).then(function(res) {
             $scope.customerTable = res.data;

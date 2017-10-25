@@ -59,7 +59,7 @@ body {
     .dist-chart {
       height: 285px;
       display: inline-block;
-      width: 500px;
+      width: 600px;
       ul {
         display: inline-block;
         li {
@@ -77,13 +77,13 @@ body {
       }
       .chart {
         height: 250px;
-        width: 500px;
+        width: 100%;
       }
     }
     .compare-chart {
-      height: 285px;
+      height: 300px;
       display: inline-block;
-      width: 300px
+      width: 370px;
     }
   }
 
@@ -97,13 +97,14 @@ body {
     padding: 15px 0;
     .customer-table {
       height: 300px;
-      width: 500px;
+      width: 600px;
       .tools {
         margin-bottom: 10px;
-        select {
+        select.form-control {
           display: inline-block;
           padding: 3px 6px;
           font-size: 11px;
+          height: 28px
         }
         select:first-child {
           width: 60px;
@@ -114,9 +115,14 @@ body {
         select:nth-child(3) {
           width: 80px;
         }
+        .btn-success {
+          padding: 5px 12px;
+          font-size: 11px;
+          background-color: #36c6d3;
+        }
       }
       .table-responsive {
-        max-height:240px;
+        max-height:280px;
         overflow: auto;
         table {
           th, td {
@@ -132,6 +138,10 @@ body {
       .radar-chart {
         width: 100% !important;
         height: 100% !important;
+        canvas {
+          width: 100% !important;
+          height: 100% !important;
+        }
       }
     }
     .company-bg {

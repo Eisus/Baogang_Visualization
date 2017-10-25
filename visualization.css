@@ -46,7 +46,7 @@ body {
 #customerVis .top .dist-chart {
   height: 285px;
   display: inline-block;
-  width: 500px;
+  width: 600px;
 }
 #customerVis .top .dist-chart ul {
   display: inline-block;
@@ -63,12 +63,12 @@ body {
 }
 #customerVis .top .dist-chart .chart {
   height: 250px;
-  width: 500px;
+  width: 100%;
 }
 #customerVis .top .compare-chart {
-  height: 285px;
+  height: 300px;
   display: inline-block;
-  width: 300px;
+  width: 370px;
 }
 #customerVis .bottom {
   background-color: #fff;
@@ -81,15 +81,16 @@ body {
 }
 #customerVis .bottom .customer-table {
   height: 300px;
-  width: 500px;
+  width: 600px;
 }
 #customerVis .bottom .customer-table .tools {
   margin-bottom: 10px;
 }
-#customerVis .bottom .customer-table .tools select {
+#customerVis .bottom .customer-table .tools select.form-control {
   display: inline-block;
   padding: 3px 6px;
   font-size: 11px;
+  height: 28px;
 }
 #customerVis .bottom .customer-table .tools select:first-child {
   width: 60px;
@@ -100,8 +101,13 @@ body {
 #customerVis .bottom .customer-table .tools select:nth-child(3) {
   width: 80px;
 }
+#customerVis .bottom .customer-table .tools .btn-success {
+  padding: 5px 12px;
+  font-size: 11px;
+  background-color: #36c6d3;
+}
 #customerVis .bottom .customer-table .table-responsive {
-  max-height: 240px;
+  max-height: 280px;
   overflow: auto;
 }
 #customerVis .bottom .customer-table .table-responsive table th,
@@ -114,6 +120,10 @@ body {
   height: 350px !important;
 }
 #customerVis .bottom .radar-container .radar-chart {
+  width: 100% !important;
+  height: 100% !important;
+}
+#customerVis .bottom .radar-container .radar-chart canvas {
   width: 100% !important;
   height: 100% !important;
 }

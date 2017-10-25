@@ -22,13 +22,9 @@
                 <li ng-class="{ active: distSelect === 'south'}"><a name="south">南方</a></li>
                 <li ng-class="{ active: distSelect === 'west'}"><a name="west">西部</a></li>
             </ul>
-            <select class="bs-select form-control" ng-model="yearSelect" ng-change="setYear()">
-                <option>2015</option>
-                <option>2016</option>
-            </select>
             <div id="dist-scatter" class="chart"></div>
         </div>
-        <div class="compare-chart"></div>
+        <div id="compare-bar" class="compare-chart"></div>
     </div>
 
     <div class="bottom">
