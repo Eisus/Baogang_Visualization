@@ -17,15 +17,22 @@ body {
   text-align: center;
   font-weight: bold;
   margin-top: 10px;
+  margin-bottom: 20px;
 }
 .car-page .company-nav .form-group {
-  margin-bottom: 0;
+  margin-bottom: 15px;
+}
+.car-page .company-nav .form-group select {
+  display: inline-block;
 }
 .car-page .company-nav .form-group .mt-radio {
   margin-bottom: 0;
 }
+.car-page .company-nav .form-group .form-control:focus {
+  border-color: #ccc;
+}
 .car-page .car-table .table-responsive {
-  max-height: 350px;
+  max-height: 300px;
   overflow: auto;
 }
 .car-page .car-table table td,
@@ -34,10 +41,31 @@ body {
   text-align: center;
   font-size: 12px !important;
 }
-.car-page #car-chart {
-  width: 96%;
-  height: 350px;
-  margin: 15px auto;
+.car-page .container {
+  height: 330px;
+  background-color: #fff;
+}
+.car-page .container .car-info {
+  display: inline-block;
+  width: 18%;
+  float: left;
+  margin-top: 60px;
+}
+.car-page .container .car-info .row {
+  margin: 10px;
+}
+.car-page .container #car-chart {
+  display: inline-block;
+  width: 80%;
+  height: 330px;
+  float: right;
+  margin-top: 15px;
+}
+.select-bg {
+  background: rgba(175, 191, 255, 0.5) !important;
+}
+.select-bg:hover {
+  background: rgba(175, 191, 255, 0.5) !important;
 }
 #customerVis .top {
   background-color: #fff;
@@ -53,25 +81,50 @@ body {
   display: inline-block;
   width: 600px;
 }
-#customerVis .top .dist-chart ul {
+#customerVis .top .dist-chart .tab-text {
+  height: 31px;
+  line-height: 31px;
+  vertical-align: middle;
   display: inline-block;
+  float: left;
+  margin-right: 10px;
+  color: #9b9b9b;
 }
-#customerVis .top .dist-chart ul li a {
+#customerVis .top .dist-chart .nav-tabs {
+  display: inline-block;
+  border: 1px solid #c0d6fb;
+  background: #f2f7fd;
+  border-radius: 4px !important;
+  -webkit-border-radius: 4px !important;
+  -moz-border-radius: 4px !important;
+}
+#customerVis .top .dist-chart .nav-tabs li {
+  height: 33px;
+  line-height: 33px;
+  vertical-align: middle;
+  border-bottom: none !important;
+}
+#customerVis .top .dist-chart .nav-tabs li a {
   padding: 5px 7.5px;
+  color: #9b9b9b;
 }
-#customerVis .top .dist-chart select {
-  width: 65px;
-  float: right;
-  padding: 3px 6px;
-  font-size: 12px;
-  margin-right: 15px;
+#customerVis .top .dist-chart .nav-tabs li:hover {
+  border-bottom: none !important;
+}
+#customerVis .top .dist-chart .act {
+  background: #fff;
+  border: 1px #c0d6fb solid;
+  border-radius: 4px !important;
+  -webkit-border-radius: 4px !important;
+  -moz-border-radius: 4px !important;
+  border-collapse: collapse;
 }
 #customerVis .top .dist-chart .chart {
   height: 250px;
   width: 100%;
 }
 #customerVis .top .compare-chart {
-  height: 300px;
+  height: 285px;
   display: inline-block;
   width: 370px;
 }
@@ -109,10 +162,12 @@ body {
 #customerVis .bottom .customer-table .tools .btn-success {
   padding: 5px 12px;
   font-size: 11px;
-  background-color: #36c6d3;
+  background-color: #3E84E7;
+  border: none;
+  outline: none;
 }
 #customerVis .bottom .customer-table .table-responsive {
-  max-height: 280px;
+  max-height: 255px;
   overflow: auto;
 }
 #customerVis .bottom .customer-table .table-responsive table th,
@@ -120,9 +175,15 @@ body {
   font-size: 10px;
   padding: 5px;
 }
+#customerVis .bottom .customer-table .table-responsive table thead tr th {
+  border-bottom: 1px solid #3e84e7 !important;
+  color: #9b9b9b;
+  font-size: 12px;
+}
 #customerVis .bottom .radar-container {
-  width: 350px !important;
-  height: 350px !important;
+  width: 260px !important;
+  height: 260px !important;
+  margin-top: 10px;
 }
 #customerVis .bottom .radar-container .radar-chart {
   width: 100% !important;
@@ -131,7 +192,4 @@ body {
 #customerVis .bottom .radar-container .radar-chart canvas {
   width: 100% !important;
   height: 100% !important;
-}
-#customerVis .bottom .company-bg {
-  background: rgba(175, 191, 255, 0.5) !important;
 }

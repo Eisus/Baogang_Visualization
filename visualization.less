@@ -22,19 +22,26 @@ body {
     text-align: center;
     font-weight: bold;
     margin-top: 10px;
+    margin-bottom: 20px;
   }
   .company-nav {
     .form-group {
-      margin-bottom: 0;
+      margin-bottom: 15px;
+      select {
+        display: inline-block;
+      }
       .mt-radio {
         margin-bottom: 0;
+      }
+      .form-control:focus {
+        border-color: #ccc;
       }
     }
 
   }
   .car-table {
     .table-responsive {
-      max-height: 350px;
+      max-height: 300px;
       overflow: auto;
     }
     table {
@@ -45,11 +52,37 @@ body {
       }
     }
   }
-  #car-chart {
-    width: 96%;
-    height: 350px;
-    margin: 15px auto;
+  .container {
+    height: 330px;
+    background-color: #fff;
+    .car-info {
+      display: inline-block;
+      width: 18%;
+      float: left;
+      margin-top: 60px;
+      .row {
+        margin: 10px;
+      }
+
+    }
+    #car-chart {
+      //width: 96%;
+      //height: 350px;
+      //margin: 15px auto;
+      display: inline-block;
+      width: 80%;
+      height: 330px;
+      float: right;
+      margin-top: 15px;
+    }
   }
+}
+
+.select-bg {
+  background: rgba(175,191,255,0.5) !important;
+}
+.select-bg:hover {
+  background: rgba(175,191,255,0.5) !important;
 }
 
 #customerVis {
@@ -65,20 +98,43 @@ body {
       height: 285px;
       display: inline-block;
       width: 600px;
-      ul {
+      .tab-text {
+        height: 31px;
+        line-height: 31px;
+        vertical-align: middle;
         display: inline-block;
+        float: left;
+        margin-right: 10px;
+        color: #9b9b9b;
+      }
+      .nav-tabs {
+        display: inline-block;
+        border: 1px solid #c0d6fb;
+        background: #f2f7fd;
+        border-radius: 4px !important;
+        -webkit-border-radius: 4px !important;
+        -moz-border-radius: 4px !important;
         li {
+          height: 33px;
+          line-height: 33px;
+          vertical-align: middle;
+          border-bottom: none !important;
           a {
             padding: 5px 7.5px;
+            color: #9b9b9b;
           }
         }
+        li:hover {
+          border-bottom: none !important;
+        }
       }
-      select {
-        width: 65px;
-        float: right;
-        padding: 3px 6px;
-        font-size: 12px;
-        margin-right: 15px;
+      .act {
+        background: #fff;
+        border: 1px #c0d6fb solid;
+        border-radius: 4px !important;
+        -webkit-border-radius: 4px !important;
+        -moz-border-radius: 4px !important;
+        border-collapse: collapse;
       }
       .chart {
         height: 250px;
@@ -86,7 +142,7 @@ body {
       }
     }
     .compare-chart {
-      height: 300px;
+      height: 285px;
       display: inline-block;
       width: 370px;
     }
@@ -123,23 +179,35 @@ body {
         .btn-success {
           padding: 5px 12px;
           font-size: 11px;
-          background-color: #36c6d3;
+          background-color: #3E84E7;
+          border: none;
+          outline: none
         }
       }
       .table-responsive {
-        max-height:280px;
+        max-height:255px;
         overflow: auto;
         table {
           th, td {
             font-size: 10px;
             padding: 5px;
           }
+          thead {
+            tr {
+              th {
+                border-bottom: 1px solid #3e84e7 !important;
+                color: #9b9b9b;
+                font-size: 12px;
+              }
+            }
+          }
         }
       }
     }
     .radar-container {
-      width: 350px !important;
-      height: 350px !important;
+      width: 260px !important;
+      height: 260px !important;
+      margin-top: 10px;
       .radar-chart {
         width: 100% !important;
         height: 100% !important;
@@ -148,9 +216,6 @@ body {
           height: 100% !important;
         }
       }
-    }
-    .company-bg {
-      background: rgba(175,191,255,0.5) !important;
     }
   }
 }

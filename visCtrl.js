@@ -1,9 +1,9 @@
 /**
  * Created by LI Xueyu on 10/17/17.
  */
-$(document).ready(function() {
-    $('.company-list').select2();
-});
+// $(document).ready(function() {
+//     $('.company-list').select2();
+// });
 var app = angular.module('dataVis', []);
 app.factory('carRequest', function($http) {
    var getCompanyList =  function() {
@@ -36,6 +36,7 @@ var drawCarChart = function(date, data) {
             trigger: 'axis'
         },
         legend: {
+            right: 10,
             data: ['实际产量', '预测产量', '销量']
         },
 
@@ -91,17 +92,17 @@ app.controller('visualCtrl',['$scope', '$http','carRequest', function($scope, $h
     $scope.model = {};
 
     $scope.selectCompany = function() {
-       // send request and then set $scope.carData as response.data
-        console.log($scope.companySelect);
-        // carRequest.getCarData($scope.companySelect).then(function(res) {
-        //     $scope.carData = $.extend(true, [], res.data);
-        // }, function(err) {
-        //     console.log(err);
-        // })
+       //  console.log($scope.companySelect);
+        carRequest.getCarData($scope.companySelect).then(function(res) {
+            $scope.carData = $.extend(true, [], res.data);
+            $scope.carSelect = 0;
+        }, function(err) {
+            console.log(err);
+        })
     };
-    $scope.$watch("companySelect",function(newValue){
-        console.log(newValue);
-    });
+    // $scope.$watch("companySelect",function(newValue){
+    //     console.log(newValue);
+    // });
     var prepareChartData = function(index) {
         var x = [];
         var data = {
@@ -141,23 +142,56 @@ var drawDistScatter = function(data) {
        backgroundColor: '#fff',
        legend: {
            right: 10,
-           data: ['忠诚','人质','流失','图利']
+           data: ['忠诚','人质','流失','图利'],
+           textStyle: {
+               color: '#9b9b9b'
+           }
        },
        xAxis: {
+           name: '满意度',
+           nameTextStyle: {
+               color: '#9b9b9b'
+           },
+           nameGap: 12,
            splitLine: {
+               show: false,
                lineStyle: {
                    type: 'dashed'
                }
            },
-           min: 40
+           axisLabel: {
+             show: false
+           },
+           axisLine: {
+               lineStyle: {
+                   color: '#82b1ff'
+               }
+           },
+           min: -100,
+           max: 100
        },
        yAxis: {
+           name: '忠诚度',
+           nameTextStyle: {
+               color: '#9b9b9b'
+           },
+           nameGap: 12,
            splitLine: {
+               show: false,
                lineStyle: {
                    type: 'dashed'
                }
            },
-           scale: true
+           axisLabel: {
+               show: false
+           },
+           axisLine: {
+               lineStyle: {
+                   color: '#82b1ff'
+               }
+           },
+           min: -80,
+           max: 80
        },
        series: [{
            name: '忠诚',
@@ -180,7 +214,7 @@ var drawDistScatter = function(data) {
                    shadowBlur: 10,
                    shadowColor: 'rgba(120, 36, 50, 0.5)',
                    shadowOffsetY: 5,
-                   color: '#003366'
+                   color: '#00BCD4'
                }
            }
        }, {
@@ -204,7 +238,7 @@ var drawDistScatter = function(data) {
                    shadowBlur: 10,
                    shadowColor: 'rgba(25, 100, 150, 0.5)',
                    shadowOffsetY: 5,
-                   color: '#006699'
+                   color: '#FF6E40'
                }
            }
        }, {
@@ -228,7 +262,7 @@ var drawDistScatter = function(data) {
                    shadowBlur: 10,
                    shadowColor: 'rgba(120, 36, 50, 0.5)',
                    shadowOffsetY: 5,
-                   color: '#4cabce'
+                   color: '#FFD740'
                }
            }
        }, {
@@ -252,7 +286,7 @@ var drawDistScatter = function(data) {
                    shadowBlur: 10,
                    shadowColor: 'rgba(120, 36, 50, 0.5)',
                    shadowOffsetY: 5,
-                   color: '#e5323e'
+                   color: '#64B5F6'
                }
            }
        }]
@@ -265,24 +299,27 @@ var drawRadar = function(data15, data16) {
     var option = {
         legend: {
             data: ['2015', '2016'],
-            right: 0
+            right: 0,
+            bottom: 0,
+            orient: 'vertical',
+            textStyle: {
+                color: '#9b9b9b'
+            }
         },
+        color: ['rgb(232,78,64)','rgb(115,143,254)'],
         radar: {
             name: {
                 textStyle: {
-                    color: '#fff',
-                    backgroundColor: '#999',
-                    borderRadius: 3,
-                    padding: [3, 5]
+                    color: '#82b1ff',
                 }
             },
             indicator: [
-                { name: '价格', max: 75},
-                { name: '质量', max: 110},
-                { name: '品种', max: 105},
-                { name: '资金', max: 70},
-                { name: '物流', max: 80},
-                { name: '电商', max: 75}
+                { name: '价格', max: 100},
+                { name: '质量', max: 100},
+                { name: '品种', max: 100},
+                { name: '资金', max: 100},
+                { name: '物流', max: 100},
+                { name: '电商', max: 100}
             ]
         },
         series: [{
@@ -293,7 +330,7 @@ var drawRadar = function(data15, data16) {
                     name : '2015',
                     areaStyle: {
                         normal: {
-                            color: 'rgba(178,235,242, 0.5)'
+                            color: 'rgba(232,78,64,0.3)'
                         }
                     }
                 },
@@ -302,7 +339,7 @@ var drawRadar = function(data15, data16) {
                     name: '2016',
                     areaStyle: {
                         normal: {
-                            color: 'rgba(255,241,118, 0.5)'
+                            color: 'rgba(115,143,254,0.3)'
                         }
                     }
                 }
@@ -342,7 +379,7 @@ var prepareScaData = function(data) {
 var drawBar = function(data) {
     var compareChart = echarts.init(document.getElementById('compare-bar'));
      var option = {
-        color: ['#003366', '#006699', '#4cabce', '#e5323e'],
+        color: ['rgba(232,78,64,0.8)', 'rgba(115,143,254,0.8)'],
         tooltip: {
             trigger: 'axis',
             axisPointer: {
@@ -350,59 +387,113 @@ var drawBar = function(data) {
             }
         },
         legend: {
-            data: ['忠诚','人质','流失','图利']
+            // data: ['忠诚','人质','流失','图利']
+            data: ['2015','2016'],
+            textStyle: {
+                color: '#9b9b9b'
+            },
+            right: 0
         },
         calculable: true,
         xAxis: [
             {
+                name: '类型',
+                nameTextStyle: {
+                    color: '#9b9b9b'
+                },
+                nameGap: 12,
                 type: 'category',
                 axisTick: {show: false},
-                data: ['2015', '2016']
+                // data: ['2015','2016']
+                data: ['忠诚','人质','流失','图利'],
+                splitLine: {
+                    lineStyle: {
+                        color: '#82b1ff'
+                    }
+                },
+                axisLine: {
+                    lineStyle: {
+                        color: '#82b1ff'
+                    }
+                }
             }
         ],
         yAxis: [
             {
-                type: 'value'
+                name: '年份',
+                nameTextStyle: {
+                    color: '#9b9b9b'
+                },
+                nameGap: 12,
+                type: 'value',
+                axisLine: {
+                    lineStyle: {
+                        color: '#82b1ff'
+                    }
+                },
+                splitLine: {
+                    lineStyle: {
+                        color: '#82b1ff'
+                    }
+                }
             }
         ],
         series: [
+            // {
+            //     name: '忠诚',
+            //     type: 'bar',
+            //     barGap: 0,
+            //     data: data[0]
+            // },
+            // {
+            //     name: '人质',
+            //     type: 'bar',
+            //     data: data[1]
+            // },
+            // {
+            //     name: '流失',
+            //     type: 'bar',
+            //     data: data[2]
+            // },
+            // {
+            //     name: '图利',
+            //     type: 'bar',
+            //     data: data[3]
+            // }
             {
-                name: '忠诚',
+                name: '2015',
                 type: 'bar',
                 barGap: 0,
                 data: data[0]
             },
             {
-                name: '人质',
+                name: '2016',
                 type: 'bar',
                 data: data[1]
-            },
-            {
-                name: '流失',
-                type: 'bar',
-                data: data[2]
-            },
-            {
-                name: '图利',
-                type: 'bar',
-                data: data[3]
             }
         ]
     };
      compareChart.setOption(option);
 }
 var prepareBarData = function(data) {
-    var zc = [];
-    var rz = [];
-    var ls = [];
-    var tl = [];
-    for(var item in data) {
-        zc.push(data[item]['1']);
-        rz.push(data[item]['2']);
-        ls.push(data[item]['3']);
-        tl.push(data[item]['4']);
+    // var zc = [];
+    // var rz = [];
+    // var ls = [];
+    // var tl = [];
+    // for(var item in data) {
+    //     zc.push(data[item]['1']);
+    //     rz.push(data[item]['2']);
+    //     ls.push(data[item]['3']);
+    //     tl.push(data[item]['4']);
+    // }
+    // return [zc, rz, ls, tl];
+    var data15 = [];
+    var data16 = [];
+    for (var i = 1; i<5; i++) {
+        data15.push(data['2015'][i]);
+        data16.push(data['2016'][i]);
     }
-    return [zc, rz, ls, tl];
+    return [data15, data16];
 }
 
 var customer = angular.module('customerApp',[]);

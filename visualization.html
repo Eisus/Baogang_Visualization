@@ -12,40 +12,24 @@
 <body>
 <div class="container-box" ng-app="dataVis" ng-controller="visualCtrl">
     <div class="tabbable-custom ">
-        <ul class="nav nav-tabs ">
-            <li class="active">
-                <a href="#car" data-toggle="tab"> 汽车 </a>
-            </li>
-            <li>
-                <a href="#area" data-toggle="tab"> 区域 </a>
-            </li>
-            <li>
-                <a href="#psr" data-toggle="tab"> PSR </a>
-            </li>
-        </ul>
         <div class="tab-content">
             <div class="tab-pane active" id="car">
-                <!--<div ng-include="'car.html'"></div>-->
                 <div class="car-page">
                     <h3 class="page-title">汽车厂需求量预测（辆数）</h3>
                     <div class="company-nav">
-                        <!--<div class="form-group">-->
-                            <!--<div class="mt-radio-inline">-->
-                                <!--<label class="mt-radio" ng-repeat="company in companies">-->
-                                    <!--<input type="radio" name="carType" ng-value="$index"-->
-                                           <!--ng-model="model.companySelect"-->
-                                           <!--ng-change="selectCompany()"> {{ company }}-->
-                                    <!--<span></span>-->
-                                <!--</label>-->
-                            <!--</div>-->
-                        <!--</div>-->
-                        <select class="company-list" ng-model="companySelect" data-placeholder="test" >
-                            <option ng-repeat="company in companies" ng-value="$index" ng-bind="company"></option>
-                        </select>
+                        <!--<select class="company-list" ng-model="companySelect" data-placeholder="test" >-->
+                            <!--<option ng-repeat="company in companies" ng-value="$index" ng-bind="company"></option>-->
+                        <!--</select>-->
+                        <div class="form-group">
+                            <label>公司名称: </label>
+                            <select class="form-control input-large company-list" ng-model="companySelect" ng-change="selectCompany()">
+                                <option ng-repeat="company in companies" ng-value="$index" ng-bind="company"></option>
+                            </select>
+                        </div>
                     </div>
                     <div class="car-table">
                         <div class="table-responsive">
-                            <table class="table table-striped table-bordered table-hover table-condensed">
+                            <table class="table table-striped table-bordered table-condensed">
                                 <thead>
                                 <tr>
                                     <th rowspan="2">车型</th>
@@ -59,9 +43,9 @@
                                 </tr>
                                 </thead>
                                 <tbody>
-                                <tr ng-repeat="car in carData">
+                                <tr ng-repeat="car in carData" ng-class="{'select-bg': carSelect == $index}">
                                     <td><a href="#" ng-click="selectCar($index)" ng-bind="car.name"></a></td>
-                                    <td ng-bind="car.accuracy"></td>
+                                    <td ng-bind="((car.accuracy * 100) | number:2) + ' %' "></td>
                                     <td ng-repeat-start="x in date" ng-bind="car.data[x].ACTUAL"></td>
                                     <td ng-bind="car.data[x].PREDICT"></td>
                                     <td ng-repeat-end ng-bind="car.data[x].CAR_SALE"></td>
@@ -70,15 +54,19 @@
                             </table>
                         </div>
                     </div>
-                    <div id="car-chart"></div>
+                    <div class="container">
+                        <div class="car-info">
+                            <div class="row">
+                                公司名称: {{ companies[companySelect] }}
+                            </div>
+                            <div class="row">
+                                汽车型号: {{ carData[carSelect].name }}
+                            </div>
+                        </div>
+                        <div id="car-chart"></div>
+                    </div>
 
                 </div>
-            </div>
-            <div class="tab-pane" id="area">
-               <div ng-include="'area.html'"></div>
-            </div>
-            <div class="tab-pane" id="psr">
-                <div ng-include="'psr.html'"></div>
             </div>
         </div>
     </div>

@@ -13,14 +13,15 @@
 <div id="customerVis" class="out-container">
     <div class="top">
         <div class="tabbable-line dist-chart">
+            <div class="tab-text">区域选择: </div>
             <ul class=" nav nav-tabs" ng-click="selectDist($event)">
-                <li ng-class="{ active: distSelect === 'all'}"><a name="all">全部</a></li>
-                <li ng-class="{ active: distSelect === 'north'}"><a name="north">北方</a></li>
-                <li ng-class="{ active: distSelect === 'northeast'}"><a name="northeast">东北</a></li>
-                <li ng-class="{ active: distSelect === 'east'}"><a name="east">华东</a></li>
-                <li ng-class="{ active: distSelect === 'center'}"><a name="center">华中</a></li>
-                <li ng-class="{ active: distSelect === 'south'}"><a name="south">南方</a></li>
-                <li ng-class="{ active: distSelect === 'west'}"><a name="west">西部</a></li>
+                <li ng-class="{ act: distSelect === 'all'}"><a name="all">全部</a></li>
+                <li ng-class="{ act: distSelect === 'north'}"><a name="north">北方</a></li>
+                <li ng-class="{ act: distSelect === 'northeast'}"><a name="northeast">东北</a></li>
+                <li ng-class="{ act: distSelect === 'east'}"><a name="east">华东</a></li>
+                <li ng-class="{ act: distSelect === 'center'}"><a name="center">华中</a></li>
+                <li ng-class="{ act: distSelect === 'south'}"><a name="south">南方</a></li>
+                <li ng-class="{ act: distSelect === 'west'}"><a name="west">西部</a></li>
             </ul>
             <div id="dist-scatter" class="chart"></div>
         </div>
@@ -58,12 +59,12 @@
                 <button class="btn btn-success" ng-click="searchCompany()">搜索</button>
             </div>
             <div class="table-responsive">
-                <table class="table table-striped table-bordered table-hover table-condensed">
+                <table class="table table-striped table-hover table-condensed">
                     <thead>
                     <tr>
-                        <th class="col-mid-3">客户全称</th>
-                        <th class="col-mid-2">区域</th>
-                        <th class="col-mid-2">类型</th>
+                        <th class="col-mid-2">客户全称</th>
+                        <th class="col-mid-1">区域</th>
+                        <th class="col-mid-3">类型</th>
                         <th class="col-mid-3">客户类型</th>
                         <th class="col-mid-1">忠诚度</th>
                         <th class="col-mid-1">满意度</th>
