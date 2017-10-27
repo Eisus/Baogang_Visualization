@@ -32,6 +32,7 @@
         <div class="customer-table">
             <div class="tools">
                 <select class="bs-select form-control" ng-model="s_dist">
+                    <option value='' disabled selected style='display:none;'>区域</option>
                     <option value="all">全部</option>
                     <option value="north">北方</option>
                     <option value="northeast">东北</option>
@@ -41,6 +42,7 @@
                     <option value="west">西部</option>
                 </select>
                 <select class="bs-select form-control" ng-model="s_style">
+                    <option value='' disabled selected style='display:none;'>客户等级</option>
                     <option value="all">全部</option>
                     <option value="1">宝钢国际内子公司</option>
                     <option value="2">代理商</option>
@@ -50,6 +52,7 @@
                     <option value="6">直供用户</option>
                 </select>
                 <select class="bs-select form-control" ng-model="s_type">
+                    <option value='' disabled selected style='display:none;'>客户类型</option>
                     <option value="all">全部</option>
                     <option value="1">忠诚型</option>
                     <option value="2">人质型</option>
@@ -98,5 +101,5 @@
 <script src="echarts.min.js"></script>
 <script src="app.min.js"></script>
 <script src="visCtrl.js"></script>
-</>
+</body>
 </html>

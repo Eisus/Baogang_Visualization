@@ -103,6 +103,7 @@ body {
   line-height: 33px;
   vertical-align: middle;
   border-bottom: none !important;
+  right: 1px;
 }
 #customerVis .top .dist-chart .nav-tabs li a {
   padding: 5px 7.5px;
