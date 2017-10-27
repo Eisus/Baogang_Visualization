@@ -37,11 +37,11 @@ var drawCarChart = function(date, data) {
         },
         legend: {
             data: ['实际产量', '预测产量', '销量'],
-            left: "center",
+            right: 0,
             top: 0
 
         },
-        color: ['rgb(0,200,220)','rgb(1,106,255)','rgb(110,61,255)'],
+        color: ['rgb(240,37,74)','rgb(0,190,162)','rgb(0,61,166)'],
         calculable: true,
         xAxis: [{
             type: 'category',
@@ -61,12 +61,12 @@ var drawCarChart = function(date, data) {
             data: data.real,
             lineStyle: {
                 normal: {
-                    color: 'rgb(0,200,220)'
+                    color: 'rgb(240,37,74 )'
                 }
             },
             areaStyle: {
                 normal: {
-                    color: 'rgba(0,200,220,0.05)'
+                    color: 'rgba(240,37,74,0.05)'
                 }
             }
         }, {
@@ -75,12 +75,12 @@ var drawCarChart = function(date, data) {
             data: data.predict,
             lineStyle: {
                 normal: {
-                    color: 'rgb(1,106,255)'
+                    color: 'rgb(0,190,162)'
                 }
             },
             areaStyle: {
                 normal: {
-                    color: 'rgba(1,106,255,0.05)'
+                    color: 'rgba(0,190,162,0.05)'
                 }
             }
         }, {
@@ -89,12 +89,12 @@ var drawCarChart = function(date, data) {
             data: data.sale,
             lineStyle: {
                 normal: {
-                    color: 'rgb(110,61,255)'
+                    color: 'rgb(0,61,166)'
                 }
             },
             areaStyle: {
                 normal: {
-                    color: 'rgba(110,61,255,0.05)'
+                    color: 'rgba(0,61,166,0.05)'
                 }
             }
         }]

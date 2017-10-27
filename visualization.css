@@ -15,9 +15,9 @@ body {
 }
 .car-page .page-title {
   text-align: center;
-  font-weight: bold;
   margin-top: 10px;
   margin-bottom: 20px;
+  font-size: 18px;
 }
 .car-page .company-nav .form-group {
   margin-bottom: 15px;
@@ -34,23 +34,54 @@ body {
 .car-page .car-table .table-responsive {
   max-height: 300px;
   overflow: auto;
+  position: relative;
+}
+.car-page .car-table table {
+  border: 1px solid #367ca2;
+  border-left: none;
+  border-right: none;
 }
 .car-page .car-table table td,
 .car-page .car-table table th {
   min-width: 80px;
+  max-width: 80px;
   text-align: center;
   font-size: 12px !important;
 }
+.car-page .car-table table thead {
+  position: absolute;
+}
 .car-page .car-table table thead th {
   color: #367ca2;
+  border: 1px solid #367ca2;
+}
+.car-page .car-table table thead tr:first-child th:last-child {
+  border-right: 1px solid #367ca2 !important;
 }
 .car-page .car-table table thead tr:nth-child(2) {
   background: #f0f6f8;
+}
+.car-page .car-table table thead tr:nth-child(2) th:first-child {
+  max-width: 100px;
+  min-width: 100px;
+}
+.car-page .car-table table tbody {
+  margin-top: 52px;
+}
+.car-page .car-table table tbody tr td:first-child {
+  max-width: 100px;
+  min-width: 100px;
+  border-left: 1px solid #367ca2;
+}
+.car-page .car-table table tbody td:last-child {
+  border-right: 1px solid #367ca2;
 }
 .car-page .container {
   height: 330px;
   background-color: #fff;
   position: relative;
+  margin: 0;
+  width: 100%;
 }
 .car-page .container .car-info {
   position: absolute;

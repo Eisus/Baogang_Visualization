@@ -20,9 +20,9 @@ body {
 .car-page {
   .page-title {
     text-align: center;
-    font-weight: bold;
     margin-top: 10px;
     margin-bottom: 20px;
+    font-size: 18px;
   }
   .company-nav {
     .form-group {
@@ -43,28 +43,58 @@ body {
     .table-responsive {
       max-height: 300px;
       overflow: auto;
+      position: relative;
     }
     table {
+      border: 1px solid #367ca2;
+      border-left: none;
+      border-right: none;
       td, th{
         min-width: 80px;
+        max-width: 80px;
         text-align: center;
         font-size: 12px !important;
       }
       thead {
+        position:absolute;
         th {
           color: #367ca2;
+          border: 1px solid #367ca2;
+        }
+        tr:first-child {
+          th:last-child {
+            border-right: 1px solid #367ca2 !important;
+          }
         }
         tr:nth-child(2) {
           background: #f0f6f8;
+          th:first-child {
+            max-width: 100px;
+            min-width: 100px;
+          }
         }
       }
-
+      tbody {
+        margin-top: 52px;
+        tr {
+          td:first-child {
+            max-width: 100px;
+            min-width: 100px;
+            border-left: 1px solid #367ca2;
+          }
+        }
+        td:last-child {
+          border-right: 1px solid #367ca2;
+        }
+      }
     }
   }
   .container {
     height: 330px;
     background-color: #fff;
     position: relative;
+    margin: 0;
+    width: 100%;
     .car-info {
       position: absolute;
       top: 18px;
