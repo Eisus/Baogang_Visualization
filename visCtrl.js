@@ -36,8 +36,10 @@ var drawCarChart = function(date, data) {
             trigger: 'axis'
         },
         legend: {
-            right: 10,
-            data: ['实际产量', '预测产量', '销量']
+            data: ['实际产量', '预测产量', '销量'],
+            left: "center",
+            top: 0
+
         },
         color: ['rgb(0,200,220)','rgb(1,106,255)','rgb(110,61,255)'],
         calculable: true,
