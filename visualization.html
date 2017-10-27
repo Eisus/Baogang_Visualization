@@ -6,6 +6,7 @@
     <link href="node_modules/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="node_modules/bootstrap-table/dist/bootstrap-table.min.css" rel="stylesheet">
     <link href="node_modules/select2/dist/css/select2.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.16/sc-1.4.3/datatables.min.css"/>
     <link href="components.min.css" rel="stylesheet">
     <link href="visualization.css" rel="stylesheet">
 </head>
@@ -37,7 +38,7 @@
                                     <th rowspan="1" colspan="3" ng-repeat="item in date" ng-bind="item"></th>
                                 </tr>
                                 <tr>
-                                    <th rowspan="1" colspan="1" ng-repeat-start="date in carData[companySelect].data">实际需求量</th>
+                                    <th rowspan="1" colspan="1" ng-repeat-start="date in carData[carSelect].data">实际需求量</th>
                                     <th rowspan="1" colspan="1">预测需求量</th>
                                     <th rowspan="1" colspan="1" ng-repeat-end>销量</th>
                                 </tr>
@@ -53,6 +54,31 @@
                                 </tbody>
                             </table>
                         </div>
+                        <!--<div class="portlet-body table-both-scroll">-->
+                            <!--<table class="table table-striped table-bordered table-hover order-column" id="sample_3">-->
+                                <!--<thead>-->
+                                <!--<tr>-->
+                                <!--<th rowspan="2">车型</th>-->
+                                <!--<th rowspan="2">准确度</th>-->
+                                <!--<th rowspan="1" colspan="3" ng-repeat="item in date" ng-bind="item"></th>-->
+                                <!--</tr>-->
+                                <!--<tr>-->
+                                    <!--<th rowspan="1" colspan="1" ng-repeat-start="date in carData[companySelect].data">实际需求量</th>-->
+                                    <!--<th rowspan="1" colspan="1">预测需求量</th>-->
+                                    <!--<th rowspan="1" colspan="1" ng-repeat-end>销量</th>-->
+                                <!--</tr>-->
+                                <!--</thead>-->
+                                <!--<tbody>-->
+                                <!--<tr ng-repeat="car in carData" ng-class="{'select-bg': carSelect == $index}">-->
+                                <!--<td><a href="#" ng-click="selectCar($index)" ng-bind="car.name"></a></td>-->
+                                <!--<td ng-bind="((car.accuracy * 100) | number:2) + ' %' "></td>-->
+                                <!--<td ng-repeat-start="x in date" ng-bind="car.data[x].ACTUAL"></td>-->
+                                <!--<td ng-bind="car.data[x].PREDICT"></td>-->
+                                <!--<td ng-repeat-end ng-bind="car.data[x].CAR_SALE"></td>-->
+                                <!--</tr>-->
+                                <!--</tbody>-->
+                            <!--</table>-->
+                        <!--</div>-->
                     </div>
                     <div class="container">
                         <div class="car-info">
@@ -78,6 +104,7 @@
 <script src="node_modules/bootstrap-table/dist/bootstrap-table.min.js"></script>
 <script src="node_modules/select2/dist/js/select2.full.min.js"></script>
 <script src="echarts.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.16/sc-1.4.3/datatables.min.js"></script>
 <script src="app.min.js"></script>
 <script src="visCtrl.js"></script>
 </body>

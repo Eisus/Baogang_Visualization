@@ -39,12 +39,16 @@ var drawCarChart = function(date, data) {
             right: 10,
             data: ['实际产量', '预测产量', '销量']
         },
-
+        color: ['rgb(0,200,220)','rgb(1,106,255)','rgb(110,61,255)'],
         calculable: true,
         xAxis: [{
             type: 'category',
             boundaryGap: false,
-            data: date
+            data: date,
+            axisLabel: {
+                interval: 0,
+                rotate: 30
+            }
         }],
         yAxis: [{
             type: 'value'
@@ -52,15 +56,45 @@ var drawCarChart = function(date, data) {
         series: [{
             name: '实际产量',
             type: 'line',
-            data: data.real
+            data: data.real,
+            lineStyle: {
+                normal: {
+                    color: 'rgb(0,200,220)'
+                }
+            },
+            areaStyle: {
+                normal: {
+                    color: 'rgba(0,200,220,0.05)'
+                }
+            }
         }, {
             name: '预测产量',
             type: 'line',
-            data: data.predict
+            data: data.predict,
+            lineStyle: {
+                normal: {
+                    color: 'rgb(1,106,255)'
+                }
+            },
+            areaStyle: {
+                normal: {
+                    color: 'rgba(1,106,255,0.05)'
+                }
+            }
         }, {
             name: '销量',
             type: 'line',
-            data: data.sale
+            data: data.sale,
+            lineStyle: {
+                normal: {
+                    color: 'rgb(110,61,255)'
+                }
+            },
+            areaStyle: {
+                normal: {
+                    color: 'rgba(110,61,255,0.05)'
+                }
+            }
         }]
     };
     carChart.setOption(option);
@@ -73,6 +107,14 @@ app.controller('visualCtrl',['$scope', '$http','carRequest', function($scope, $h
     $scope.companySelect = 0;
     $scope.carSelect = 0;
     $scope.date = [];
+    // $(document).ready(function() {
+    //     $('#sample_3').dataTable({
+    //         scroller: true,
+    //         deferRender: true,
+    //         scrollY: 300,
+    //         scrollX: true
+    //     });
+    // });
     carRequest.getCompanyList().then(function(res){
         $scope.companies = res.data;
     }, function(err){
