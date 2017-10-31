@@ -73,13 +73,13 @@
                                 </tr>
                                 </thead>
                                 <tbody style="display: block; overflow-y: auto; max-height: 200px">
-                                <tr ng-repeat="car in carData" ng-class="{'select-bg': carSelect == $index}">
+                                <tr ng-repeat="car in carData|orderBy:'-accuracy'" ng-class="{'select-bg': carSelect == $index}">
                                     <td><a style="font-weight:bold; " href="#" ng-click="selectCar($index)" ng-bind="car.name"></a></td>
                                     <td style="font-weight:bold; border-right: 1px solid #367ca2" ng-bind="((car.accuracy * 100) | number:2) + ' %' "></td>
                                     <td style="border-left: 1px solid #367ca2; border-bottom: 1px dashed #ddd; border-top: 1px dashed #ddd; border-right: none"
-                                        ng-repeat-start="x in date" ng-bind="car.data[x].ACTUAL | number: 2"></td>
-                                    <td style="border-bottom: 1px dashed #ddd; border-top: 1px dashed #ddd; border-right: none; border-left: none" ng-bind="car.data[x].PREDICT | number: 2"></td>
-                                    <td style="border-right: 1px solid #367ca2;border-bottom: 1px dashed #ddd; border-top: 1px dashed #ddd; border-left: none" ng-repeat-end ng-bind="car.data[x].CAR_SALE | number: 2"></td>
+                                        ng-repeat-start="x in date" ng-bind="car.data[x].ACTUAL | number: 0"></td>
+                                    <td style="border-bottom: 1px dashed #ddd; border-top: 1px dashed #ddd; border-right: none; border-left: none" ng-bind="car.data[x].PREDICT | number: 0"></td>
+                                    <td style="border-right: 1px solid #367ca2;border-bottom: 1px dashed #ddd; border-top: 1px dashed #ddd; border-left: none" ng-repeat-end ng-bind="car.data[x].CAR_SALE | number: 0"></td>
                                 </tr>
                                 </tbody>
                             </table>
